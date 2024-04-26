@@ -6,11 +6,11 @@ use std::sync::Arc;
 /// 追踪信息 实现 inc,dec,snapshot
 /// 这里的Clone调用了Data的Clon 相当于 Metrics{ data: data.clone() }
 #[derive(Debug, Clone)]
-pub struct Metrics {
+pub struct CmapMetrics {
     data: Arc<DashMap<String, u64>>,
 }
 
-impl Metrics {
+impl CmapMetrics {
     pub fn new() -> Self {
         Self {
             data: Arc::new(DashMap::new()),
@@ -29,7 +29,7 @@ impl Metrics {
     }
 }
 
-impl Display for Metrics {
+impl Display for CmapMetrics {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         for entry in self.data.iter() {
             writeln!(f, "{}: {}", entry.key(), entry.value())?;
@@ -38,7 +38,7 @@ impl Display for Metrics {
     }
 }
 
-impl Default for Metrics {
+impl Default for CmapMetrics {
     fn default() -> Self {
         Self::new()
     }
