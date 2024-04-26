@@ -30,7 +30,9 @@ where
         return Err(anyhow::anyhow!("向量长度不一致"));
     }
 
+    // 进行累加
     let mut sum = T::default();
+    //累加 a.row[i] * b.col[i]的结果
     for i in 0..a.len() {
         sum += a[i] * b[i];
     }
